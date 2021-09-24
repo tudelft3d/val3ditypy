@@ -33,3 +33,5 @@
 
 
 build/
+dist/
+val3ditypy.egg-info/
