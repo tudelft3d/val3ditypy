@@ -9,83 +9,77 @@ using json = nlohmann::json;
 namespace py = pybind11;
 
 //validate_onegeom
-bool is_valid_onegeom(py::dict obj,
-                       double tol_snap=0.001,
-                       double planarity_d2p_tol=0.01,
-                       double planarity_n_tol=20.0,
-                       double overlap_tol=-1.0){
-    json j = obj;//create a nlohmann::json instance
-    return val3dity::validate_one_geom(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
+bool 
+is_valid_onegeom(py::dict obj,
+                 double tol_snap=0.001,
+                 double planarity_d2p_tol=0.01,
+                 double planarity_n_tol=20.0,
+                 double overlap_tol=-1.0){
+  json j = obj;
+  return val3dity::validate_one_geom(j, tol_snap,planarity_d2p_tol, planarity_n_tol, overlap_tol);
 }
 
-bool validate_onegeom(py::dict obj, py::dict jr,
-                       double tol_snap=0.001,
-                       double planarity_d2p_tol=0.01,
-                       double planarity_n_tol=20.0,
-                       double overlap_tol=-1.0){
-    json j = obj;//create a nlohmann::json instance
-    json jreport = jr;
-    bool re = val3dity::validate_one_geom(j,jreport,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
-    std::cout << jreport << "\n";
-
-    std::ofstream o("validate_one_geom_report.json");
-    o << std::setw(4) << jreport << std::endl;
-
-    return re;
+py::dict
+validate_onegeom(py::dict obj,
+                 double tol_snap=0.001,
+                 double planarity_d2p_tol=0.01,
+                 double planarity_n_tol=20.0,
+                 double overlap_tol=-1.0){
+  json j = obj;//create a nlohmann::json instance
+  json jreport;
+  bool re = val3dity::validate_one_geom(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+  py::object result = jreport;
+  return result;
 }
 
 
 //validate_tu3djson
-std::vector<bool> is_valid_tu3djson(py::dict obj,
-                       double tol_snap=0.001,
-                       double planarity_d2p_tol=0.01,
-                       double planarity_n_tol=20.0,
-                       double overlap_tol=-1.0){
-    json j = obj; //create a nlohmann::json instance
-    return val3dity::validate_tu3djson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
+std::vector<bool> 
+is_valid_tu3djson(py::dict obj,
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+  json j = obj; 
+  return val3dity::validate_tu3djson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
 }
 
-std::vector<bool> validate_tu3djson(py::dict obj, py::dict jr,
-                          double tol_snap=0.001,
-                          double planarity_d2p_tol=0.01,
-                          double planarity_n_tol=20.0,
-                          double overlap_tol=-1.0){
-    json j = obj;//create a nlohmann::json instance
-    json jreport = jr;
-    std::vector<bool> re = val3dity::validate_tu3djson(j,jreport,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
-    std::cout << jreport << "\n";
-
-    std::ofstream o("validate_tu3djson_report.json");
-    o << std::setw(4) << jreport << std::endl;
-
-    return re;
+py::dict
+validate_tu3djson(py::dict obj, 
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+    json j = obj;
+    json jreport;
+    std::vector<bool> re = val3dity::validate_tu3djson(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    py::object result = jreport;
+    return result;
 }
 
 
 //validate_cityjson
-bool is_valid_cityjson(py::dict obj,
-                       double tol_snap=0.001,
-                       double planarity_d2p_tol=0.01,
-                       double planarity_n_tol=20.0,
-                       double overlap_tol=-1.0){
-    json j = obj; //create a nlohmann::json instance
+bool 
+is_valid_cityjson(py::dict obj,
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+    json j = obj; 
     return val3dity::validate_cityjson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
 }
 
-bool validate_cityjson(py::dict obj, py::dict jr,
-                          double tol_snap=0.001,
-                          double planarity_d2p_tol=0.01,
-                          double planarity_n_tol=20.0,
-                          double overlap_tol=-1.0){
-    json j = obj;//create a nlohmann::json instance
-    json jreport = jr;
-    bool re = val3dity::validate_cityjson(j,jreport,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
-    std::cout << jreport << "\n";
-
-    std::ofstream o("validate_cityjson_report.json");
-    o << std::setw(4) << jreport << std::endl;
-
-    return re;
+py::dict 
+validate_cityjson(py::dict obj, 
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+    json j = obj;
+    json jreport;
+    bool re = val3dity::validate_cityjson(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    py::object result = jreport;
+    return result;
 }
 
 
@@ -134,7 +128,6 @@ PYBIND11_MODULE(val3ditypy, m) {
       &validate_onegeom, 
       "Return validation report for one geometry",
       py::arg("geometry"),  
-      py::arg("jreport"), 
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
       py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0
@@ -155,7 +148,6 @@ PYBIND11_MODULE(val3ditypy, m) {
       &validate_tu3djson, 
       "A function validate tu3djson return with report",
       py::arg("geometry"),  
-      py::arg("jreport"), 
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
       py::arg("planarity_n_tol")=20.0,
@@ -178,7 +170,6 @@ PYBIND11_MODULE(val3ditypy, m) {
       &validate_cityjson, 
       "A function validate cityjson file return with report",
       py::arg("cityjson"), 
-      py::arg("jreport"), 
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
       py::arg("planarity_n_tol")=20.0,
