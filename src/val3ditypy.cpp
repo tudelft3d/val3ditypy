@@ -8,8 +8,8 @@ using json = nlohmann::json;
 #include <pybind11/stl.h>
 namespace py = pybind11;
 
-//validate_one_geom
-bool validate_one_geom(py::dict obj,
+//validate_onegeom
+bool is_valid_onegeom(py::dict obj,
                        double tol_snap=0.001,
                        double planarity_d2p_tol=0.01,
                        double planarity_n_tol=20.0,
@@ -18,7 +18,7 @@ bool validate_one_geom(py::dict obj,
     return val3dity::validate_one_geom(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
 }
 
-bool validate_one_geom_jr(py::dict obj, py::dict jr,
+bool validate_onegeom(py::dict obj, py::dict jr,
                        double tol_snap=0.001,
                        double planarity_d2p_tol=0.01,
                        double planarity_n_tol=20.0,
@@ -36,7 +36,7 @@ bool validate_one_geom_jr(py::dict obj, py::dict jr,
 
 
 //validate_tu3djson
-std::vector<bool> validate_tu3djson(py::dict obj,
+std::vector<bool> is_valid_tu3djson(py::dict obj,
                        double tol_snap=0.001,
                        double planarity_d2p_tol=0.01,
                        double planarity_n_tol=20.0,
@@ -45,7 +45,7 @@ std::vector<bool> validate_tu3djson(py::dict obj,
     return val3dity::validate_tu3djson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
 }
 
-std::vector<bool> validate_tu3djson_jr(py::dict obj, py::dict jr,
+std::vector<bool> validate_tu3djson(py::dict obj, py::dict jr,
                           double tol_snap=0.001,
                           double planarity_d2p_tol=0.01,
                           double planarity_n_tol=20.0,
@@ -63,7 +63,7 @@ std::vector<bool> validate_tu3djson_jr(py::dict obj, py::dict jr,
 
 
 //validate_cityjson
-bool validate_cityjson(py::dict obj,
+bool is_valid_cityjson(py::dict obj,
                        double tol_snap=0.001,
                        double planarity_d2p_tol=0.01,
                        double planarity_n_tol=20.0,
@@ -72,7 +72,7 @@ bool validate_cityjson(py::dict obj,
     return val3dity::validate_cityjson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
 }
 
-bool validate_cityjson_jr(py::dict obj, py::dict jr,
+bool validate_cityjson(py::dict obj, py::dict jr,
                           double tol_snap=0.001,
                           double planarity_d2p_tol=0.01,
                           double planarity_n_tol=20.0,
@@ -102,36 +102,88 @@ bool validate_cityjson_jr(py::dict obj, py::dict jr,
 
 
 PYBIND11_MODULE(val3ditypy, m) {
-    m.doc() = "My awesome module";
+    m.doc() = R"pbdoc(
+        val3ditypy
+        -----------------------
 
-    //validate_one_geom
-    m.def("validate_one_geom", &validate_one_geom, "A function validate one geom",
-          py::arg("geometry"),  py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+        .. currentmodule:: val3ditypy
 
-    m.def("validate_one_geom_jr", &validate_one_geom_jr, "A function validate one geom return with report",
-          py::arg("geometry"),  py::arg("jreport"), py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+        .. autosummary::
+           :toctree: _generate
+
+           
+           is_valid_onegeom
+           validate_onegeom
+           is_valid_tu3djson
+           validate_tu3djson
+           is_valid_cityjson
+           validate_cityjson
+    )pbdoc";
+
+    //-- validate_onegeom
+    m.def("is_valid_onegeom", 
+      &is_valid_onegeom, 
+      "Return true/false for one geometry",
+      py::arg("geometry"),  
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0
+    );
+
+    m.def("validate_onegeom", 
+      &validate_onegeom, 
+      "Return validation report for one geometry",
+      py::arg("geometry"),  
+      py::arg("jreport"), 
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0
+    );
 
 
-    //validate_tu3djson
-    m.def("validate_tu3djson", &validate_tu3djson, "A function validate tu3djson",
-          py::arg("tu3djson"),  py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+    //-- validate_tu3djson
+    m.def("is_valid_tu3djson", 
+      &is_valid_tu3djson, 
+      "A function validate tu3djson",
+      py::arg("tu3djson"),  
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0
+    );
 
-    m.def("validate_tu3djson_jr", &validate_tu3djson_jr, "A function validate tu3djson return with report",
-          py::arg("geometry"),  py::arg("jreport"), py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+    m.def("validate_tu3djson", 
+      &validate_tu3djson, 
+      "A function validate tu3djson return with report",
+      py::arg("geometry"),  
+      py::arg("jreport"), 
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,
+      py::arg("overlap_tol")=-1.0
+    );
 
 
     //validate_cityjson
-    m.def("validate_cityjson", &validate_cityjson, "A function validate cityjson",
-          py::arg("cityjson"),  py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+    m.def("is_valid_cityjson", 
+      &is_valid_cityjson, 
+      "A function validate cityjson",
+      py::arg("cityjson"),  
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,
+      py::arg("overlap_tol")=-1.0
+    );
 
-    m.def("validate_cityjson_jr", &validate_cityjson_jr, "A function validate cityjson file return with report",
-          py::arg("cityjson"),  py::arg("jreport"), py::arg("tol_snap")=0.001,py::arg("planarity_d2p_tol")=0.01,
-          py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0);
+    m.def("validate_cityjson", 
+      &validate_cityjson, 
+      "A function validate cityjson file return with report",
+      py::arg("cityjson"), 
+      py::arg("jreport"), 
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,
+      py::arg("overlap_tol")=-1.0)
+    ;
 
 
     // //validate_array
