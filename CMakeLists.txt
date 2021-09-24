@@ -11,4 +11,6 @@ pybind11_add_module(val3ditypy src/val3ditypy.cpp)
 
 add_subdirectory (${CMAKE_SOURCE_DIR}/thirdparty/val3dity/ val3)
 
+target_compile_definitions(val3ditypy PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
+
 target_link_libraries (val3ditypy LINK_PUBLIC val3dity)
