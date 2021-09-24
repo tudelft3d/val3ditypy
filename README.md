@@ -1,2 +1,10 @@
 # val3ditypy
-Python bindings for the award-winning val3dity software
+
+
+## to compile:
+
+```bash
+git clone https://github.com/tudelft3d/val3dity
+git submodule init
+git submodule update
+```

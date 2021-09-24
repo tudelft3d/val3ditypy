@@ -1,0 +1,6 @@
+[submodule "thirdparty/val3dity"]
+	path = thirdparty/val3dity
+	url = https://github.com/tudelft3d/val3dity
+[submodule "thirdparty/pybind11"]
+	path = thirdparty/pybind11
+	url = https://github.com/pybind/pybind11.git
