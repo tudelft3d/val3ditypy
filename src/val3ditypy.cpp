@@ -16,7 +16,7 @@ is_valid_onegeom(py::dict obj,
                  double planarity_n_tol=20.0,
                  double overlap_tol=-1.0){
   json j = obj;
-  return val3dity::validate_one_geom(j, tol_snap,planarity_d2p_tol, planarity_n_tol, overlap_tol);
+  return val3dity::is_valid_onegeom(j, tol_snap,planarity_d2p_tol, planarity_n_tol, overlap_tol);
 }
 
 py::dict
@@ -25,10 +25,9 @@ validate_onegeom(py::dict obj,
                  double planarity_d2p_tol=0.01,
                  double planarity_n_tol=20.0,
                  double overlap_tol=-1.0){
-  json j = obj;//create a nlohmann::json instance
-  json jreport;
-  bool re = val3dity::validate_one_geom(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
-  py::object result = jreport;
+  json j = obj;
+  json jre = val3dity::validate_onegeom(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+  py::object result = jre;
   return result;
 }
 
@@ -51,9 +50,8 @@ validate_tu3djson(py::dict obj,
                   double planarity_n_tol=20.0,
                   double overlap_tol=-1.0){
     json j = obj;
-    json jreport;
-    std::vector<bool> re = val3dity::validate_tu3djson(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
-    py::object result = jreport;
+    json jre = val3dity::validate_tu3djson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    py::object result = jre;
     return result;
 }
 
@@ -76,9 +74,8 @@ validate_cityjson(py::dict obj,
                   double planarity_n_tol=20.0,
                   double overlap_tol=-1.0){
     json j = obj;
-    json jreport;
-    bool re = val3dity::validate_cityjson(j, jreport, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
-    py::object result = jreport;
+    json jre = val3dity::validate_cityjson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    py::object result = jre;
     return result;
 }
 
