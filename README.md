@@ -33,3 +33,20 @@ report = val3ditypy.validate_cityjson(mycity)
 print(report["validity"])
 ```
 
+## input accepted
+
+1. one [CityJSON object](https://www.cityjson.org/specs/1.0.3/#cityjson-object)
+2. one [tu3djson object](https://github.com/tudelft3d/tu3djson#tu3djson-object)
+3. [one geometry of a tu3djson object](https://github.com/tudelft3d/tu3djson#geometry-object)
+
+
+## functions
+
+bool is_valid_onegeom(json my data)
+json validate_onegeom(json my data)
+
+list(bool) is_valid_tu3djson(json my data)
+json validate_tu3djson(json my data)
+
+bool is_valid_cityjson(json my data)
+json validate_cityjson(json my data)
