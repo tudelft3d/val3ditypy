@@ -11,6 +11,8 @@ git submodule init
 git submodule update
 ```
 
+And you need to have [all the dependencies to compile val3dity](https://github.com/tudelft3d/val3dity#installation-of-the-command-line-tool)
+
 Compile and install as a Python package:
 
 `python setup.py install`
