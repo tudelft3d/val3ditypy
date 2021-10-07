@@ -40,7 +40,7 @@ is_valid_tu3djson(py::dict obj,
                   double planarity_n_tol=20.0,
                   double overlap_tol=-1.0){
   json j = obj; 
-  return val3dity::validate_tu3djson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+  return val3dity::is_valid_tu3djson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
 }
 
 py::dict
@@ -64,7 +64,7 @@ is_valid_cityjson(py::dict obj,
                   double planarity_n_tol=20.0,
                   double overlap_tol=-1.0){
     json j = obj; 
-    return val3dity::validate_cityjson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
+    return val3dity::is_valid_cityjson(j,tol_snap,planarity_d2p_tol,planarity_n_tol,overlap_tol);
 }
 
 py::dict 
