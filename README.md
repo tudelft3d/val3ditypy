@@ -42,11 +42,11 @@ print(report["validity"])
 
 ## functions
 
-bool is_valid_onegeom(json my data)
-json validate_onegeom(json my data)
+bool is_valid_onegeom(json mydata)
+json validate_onegeom(json mydata)
 
-list(bool) is_valid_tu3djson(json my data)
-json validate_tu3djson(json my data)
+list(bool) is_valid_tu3djson(json mydata)
+json validate_tu3djson(json mydata)
 
-bool is_valid_cityjson(json my data)
-json validate_cityjson(json my data)
+bool is_valid_cityjson(json mydata)
+json validate_cityjson(json mydata)
