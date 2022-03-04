@@ -79,17 +79,28 @@ validate_cityjson(py::dict obj,
     return result;
 }
 
+//validate_indoorgml
+bool 
+is_valid_indoorgml(const char* s,
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+    // std::cout << s << std::endl;
 
-// //validate_array
-// bool validate_arrays(std::string geom, std::vector<std::vector<std::vector<int>>> boundaries,
-//                      std::vector<std::vector<double>> vertices,
-//                     double tol_snap=0.001,
-//                     double planarity_d2p_tol=0.01,
-//                     double planarity_n_tol=20.0,
-//                     double overlap_tol=-1.0){
-//     return val3dity::validate_arrays(geom,boundaries,vertices);
-// }
+    return val3dity::is_valid_indoorgml(s, tol_snap,planarity_d2p_tol, planarity_n_tol, overlap_tol);
+}
 
+py::dict 
+validate_indoorgml(const char* s, 
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+    json jre = val3dity::validate_indoorgml(s, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    py::object result = jre;
+    return result;
+}
 
 
 PYBIND11_MODULE(val3ditypy, m) {
@@ -109,6 +120,7 @@ PYBIND11_MODULE(val3ditypy, m) {
            validate_tu3djson
            is_valid_cityjson
            validate_cityjson
+           is_valid_indoorgml
     )pbdoc";
 
     //-- validate_onegeom
@@ -134,7 +146,7 @@ PYBIND11_MODULE(val3ditypy, m) {
     //-- validate_tu3djson
     m.def("is_valid_tu3djson", 
       &is_valid_tu3djson, 
-      "A function validate tu3djson",
+      "A function to validate tu3djson",
       py::arg("tu3djson"),  
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
@@ -143,7 +155,7 @@ PYBIND11_MODULE(val3ditypy, m) {
 
     m.def("validate_tu3djson", 
       &validate_tu3djson, 
-      "A function validate tu3djson return with report",
+      "A function to validate tu3djson return with report",
       py::arg("geometry"),  
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
@@ -155,7 +167,7 @@ PYBIND11_MODULE(val3ditypy, m) {
     //validate_cityjson
     m.def("is_valid_cityjson", 
       &is_valid_cityjson, 
-      "A function validate cityjson",
+      "A function to validate cityjson",
       py::arg("cityjson"),  
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
@@ -165,7 +177,7 @@ PYBIND11_MODULE(val3ditypy, m) {
 
     m.def("validate_cityjson", 
       &validate_cityjson, 
-      "A function validate cityjson file return with report",
+      "A function to validate cityjson file return with report",
       py::arg("cityjson"), 
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
@@ -173,10 +185,25 @@ PYBIND11_MODULE(val3ditypy, m) {
       py::arg("overlap_tol")=-1.0)
     ;
 
+    //validate_indoorgml
+    m.def("is_valid_indoorgml", 
+      &is_valid_indoorgml, 
+      "A function to validate indoorgml",
+      py::arg("indoorgml string"),  
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,
+      py::arg("overlap_tol")=-1.0
+    );
 
-    // //validate_array
-    // m.def("validate_arrays",&validate_arrays,"A function validate boundaries and vertices",
-    //       py::arg("geom_type"),  py::arg("boundaries"), py::arg("vertices"),
-    //       py::arg("tol_snap")=0.001, py::arg("planarity_d2p_tol")=0.01,
-    //       py::arg("planarity_n_tol")=20.0, py::arg("overlap_tol")=-1.0);
+    m.def("validate_indoorgml", 
+      &validate_indoorgml, 
+      "A function to validate indoorgml file return with report",
+      py::arg("indoorgml string"), 
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,
+      py::arg("overlap_tol")=-1.0)
+    ;
+
 }
