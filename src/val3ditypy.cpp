@@ -33,7 +33,7 @@ validate_onegeom(py::dict obj,
 
 
 //validate_tu3djson
-std::vector<bool> 
+bool 
 is_valid_tu3djson(py::dict obj,
                   double tol_snap=0.001,
                   double planarity_d2p_tol=0.01,
@@ -41,6 +41,16 @@ is_valid_tu3djson(py::dict obj,
                   double overlap_tol=-1.0){
   json j = obj; 
   return val3dity::is_valid_tu3djson(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+}
+
+std::vector<bool> 
+is_valid_tu3djson_each(py::dict obj,
+                  double tol_snap=0.001,
+                  double planarity_d2p_tol=0.01,
+                  double planarity_n_tol=20.0,
+                  double overlap_tol=-1.0){
+  json j = obj; 
+  return val3dity::is_valid_tu3djson_each(j, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
 }
 
 py::dict
