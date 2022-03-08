@@ -96,9 +96,8 @@ is_valid_indoorgml(const char* s,
                   double planarity_d2p_tol=0.01,
                   double planarity_n_tol=20.0,
                   double overlap_tol=-1.0){
-    // std::cout << s << std::endl;
-
-    return val3dity::is_valid_indoorgml(s, tol_snap,planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    bool re = val3dity::is_valid_indoorgml(s, tol_snap, planarity_d2p_tol, planarity_n_tol, overlap_tol);
+    return re;
 }
 
 py::dict 
@@ -127,10 +126,12 @@ PYBIND11_MODULE(val3ditypy, m) {
            is_valid_onegeom
            validate_onegeom
            is_valid_tu3djson
+           is_valid_tu3djson_each
            validate_tu3djson
            is_valid_cityjson
            validate_cityjson
            is_valid_indoorgml
+           validate_indoorgml
     )pbdoc";
 
     //-- validate_onegeom
@@ -157,6 +158,15 @@ PYBIND11_MODULE(val3ditypy, m) {
     m.def("is_valid_tu3djson", 
       &is_valid_tu3djson, 
       "A function to validate tu3djson",
+      py::arg("tu3djson"),  
+      py::arg("tol_snap")=0.001,
+      py::arg("planarity_d2p_tol")=0.01,
+      py::arg("planarity_n_tol")=20.0,py::arg("overlap_tol")=-1.0
+    );
+
+    m.def("is_valid_tu3djson_each", 
+      &is_valid_tu3djson_each, 
+      "A function to validate each geom in a tu3djson",
       py::arg("tu3djson"),  
       py::arg("tol_snap")=0.001,
       py::arg("planarity_d2p_tol")=0.01,
