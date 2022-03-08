@@ -1,1 +1,0 @@
-.. automodule:: val3ditypy
