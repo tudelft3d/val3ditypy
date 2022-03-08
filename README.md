@@ -1,5 +1,7 @@
 # val3ditypy
 
+Python bindings for [val3dity](https://github.com/tudelft3d/val3dity).
+
 
 ## to install:
 
@@ -11,7 +13,7 @@ git submodule init
 git submodule update
 ```
 
-2. Install [all the dependencies of val3dity](https://github.com/tudelft3d/val3dity#installation-of-the-command-line-tool) and make sure you can compile it
+2. Install [val3dity and all its dependencies](https://github.com/tudelft3d/val3dity#installation-of-the-command-line-tool) and make sure you can compile it
 
 3. Compile the bindings and install the Python package: `python setup.py install`
 
@@ -38,15 +40,21 @@ print(report["validity"])
 1. one [CityJSON object](https://www.cityjson.org/specs/1.0.3/#cityjson-object)
 2. one [tu3djson object](https://github.com/tudelft3d/tu3djson#tu3djson-object)
 3. [one geometry of a tu3djson object](https://github.com/tudelft3d/tu3djson#geometry-object)
-
+4. [IndoorGML](http://indoorgml.net/)
 
 ## functions
 
+```python
 bool is_valid_onegeom(json mydata)
 json validate_onegeom(json mydata)
 
-list(bool) is_valid_tu3djson(json mydata)
+bool is_valid_tu3djson(json mydata)
+bool is_valid_tu3djson_each(json mydata)
 json validate_tu3djson(json mydata)
 
 bool is_valid_cityjson(json mydata)
 json validate_cityjson(json mydata)
+
+bool is_valid_indoorgml(string myindoors)
+json validate_indoorgml(string myindoors)
+```
