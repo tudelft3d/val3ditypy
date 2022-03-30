@@ -128,7 +128,7 @@ class CMakeBuild(build_ext):
 # logic and declaration, and simpler if you include description/version in a file.
 setup(
     name="val3ditypy",
-    version="0.2.0",
+    version="0.7.0",
     author="Hugo Ledoux",
     author_email="h.ledoux@tudelft.nl",
     description="Python bindinds for val3dity",
